@@ -21,3 +21,28 @@ getStaticProps, getServerSideProps, getStaticPaths 等這類方法只在 pages �
 - getStaticProps (Static Generation): Fetch data at build time.
 - getStaticPaths (Static Generation): Specify dynamic routes to pre-render based on data.
 - getServerSideProps (Server-side Rendering): Fetch data on each request.
+
+## Proxy
+
+參考: https://nextjs.org/docs/migrating/incremental-adoption#rewrites
+
+next.config.js
+
+```js
+module.exports = {
+  async rewrites() {
+    return [
+      // we need to define a no-op rewrite to trigger checking
+      // all pages/static files before we attempt proxying
+      {
+        source: '/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/:path*',
+        destination: `https://proxy.example.com/:path*`,
+      },
+    ];
+  },
+};
+```
