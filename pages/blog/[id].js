@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
 import axios from 'axios';
 
 export async function getStaticPaths() {
